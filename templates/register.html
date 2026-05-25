@@ -20,6 +20,25 @@
             <label for="confirm_password">Confirm Password</label>
             <input id="confirm_password" name="confirm_password" type="password" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
         </div>
+
+        <details style="margin-bottom:16px; background:#f0f4f8; border:1px solid #d1d5db; border-radius:8px; padding:12px; cursor:pointer;">
+            <summary style="font-weight:600; color:#1f2937; user-select:none; outline:none;">Consent & Privacy Notice</summary>
+            <div style="margin-top:12px; padding-top:12px; border-top:1px solid #d1d5db; font-size:12px; line-height:1.6; color:#374151;">
+                <p style="margin:0 0 8px 0;">We collect your personal information to register you as a user and administer the Career Assist Capacity Calculator assessment.</p>
+                <p style="margin:0 0 8px 0;"><strong>Information Collected:</strong> Name, email address, date of birth, class, and school details.</p>
+                <p style="margin:0 0 8px 0;"><strong>Data Usage:</strong> Your personal data will be used to create and manage your user account, deliver the assessment and store your responses, generate personalized results based on your answers, and allow administrators to manage user accounts and results.</p>
+                <p style="margin:0 0 8px 0;"><strong>Data Protection:</strong> Your information is stored securely in our database and protected from unauthorized access.</p>
+                <p style="margin:0;">By checking the box below, you confirm that you have read and agree to the collection and use of your personal data as described above.</p>
+            </div>
+        </details>
+
+        <div class="question-group" style="margin-bottom:16px;">
+            <label style="display:flex; align-items:flex-start; font-weight:normal; cursor:pointer;">
+                <input id="consent" name="consent" type="checkbox" required style="width:16px; height:16px; margin-right:10px; margin-top:2px; cursor:pointer;">
+                <span>I have read and agree to the data collection and privacy terms above.</span>
+            </label>
+        </div>
+
         <input type="submit" value="Register">
     </form>
     <p style="margin-top:16px;">Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>

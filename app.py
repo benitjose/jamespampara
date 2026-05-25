@@ -313,8 +313,12 @@ def index():
         dob = request.form.get('dob', '').strip()
         class_field = request.form.get('class', '').strip()
         school = request.form.get('school', '').strip()
+        consent = request.form.get('consent')
         if not name or not email or not dob:
             flash('Name, email, and date of birth are required.', 'danger')
+            return render_template('index.html')
+        if not consent:
+            flash('You must consent to the privacy notice to proceed.', 'danger')
             return render_template('index.html')
         user = query_db('SELECT id FROM users WHERE email = ?', (email,), one=True)
         if user:
@@ -392,10 +396,13 @@ def register():
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password', '')
         confirm_password = request.form.get('confirm_password', '')
+        consent = request.form.get('consent')
         if not name or not email or not password:
             flash('All fields are required.', 'danger')
         elif password != confirm_password:
             flash('Passwords do not match.', 'danger')
+        elif not consent:
+            flash('You must agree to the data collection and privacy terms to register.', 'danger')
         elif query_db('SELECT id FROM users WHERE email = ?', (email,), one=True):
             flash('Email already registered.', 'danger')
         else:

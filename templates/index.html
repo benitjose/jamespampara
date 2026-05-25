@@ -36,6 +36,23 @@
             <label for="school">School (Optional)</label>
             <input id="school" name="school" type="text" placeholder="e.g., XYZ School" style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
         </div>
+
+        <details style="margin-bottom:16px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:12px; cursor:pointer;">
+            <summary style="font-weight:600; color:#f8fafc; user-select:none; outline:none;">Consent & Privacy Notice</summary>
+            <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.2); font-size:12px; line-height:1.6; color:#f8fafc;">
+                <p style="margin:0 0 8px 0;">By proceeding with this career assessment, you consent to the collection and processing of the personal information provided, including your name, email address, date of birth, school, and class details. This information will be used solely for conducting the assessment, generating career guidance reports, communication regarding results, and improving our services.</p>
+                <p style="margin:0 0 8px 0;">Your information will be stored securely and will not be shared with third parties without your consent, except where required by law. By continuing, you confirm that the information provided is accurate and that you agree to this data usage policy.</p>
+                <p style="margin:0;">For participants under 18 years of age, parental/guardian consent may be required as per applicable regulations.</p>
+            </div>
+        </details>
+
+        <div style="margin-bottom:16px;">
+            <label style="display:flex; align-items:flex-start; font-weight:normal; cursor:pointer; color:#f8fafc;">
+                <input id="consent" name="consent" type="checkbox" required style="width:16px; height:16px; margin-right:10px; margin-top:2px; cursor:pointer;">
+                <span>I consent to the collection and processing of my personal information as described above.</span>
+            </label>
+        </div>
+
         <input type="submit" value="Register Details">
     </form>
     <p style="margin-top:14px; font-size:0.95rem; color:#f8fafc; opacity:0.9;">After registering, the admin will provide a one-time PIN for login. You cannot access the assessment until that PIN is issued.</p>
