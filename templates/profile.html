@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>My Answers</h2>
+    <p>Review your answers for each section.</p>
+    <p><strong>Total responses:</strong> {{ total_answered }} / {{ total_questions }}</p>
+    <p><strong>Average score:</strong> {{ overall_average }}</p>
+    {% if answers|length == 0 %}
+        <p>You have not submitted any answers yet. Visit the dashboard to begin.</p>
+    {% else %}
+        {% for section_id, section in question_sections.items() %}
+            <h3>{{ section.name }}</h3>
+            <p><strong>Section answered:</strong> {{ section_stats[section_id].answered }} / {{ section_stats[section_id].total }} | <strong>Average:</strong> {{ section_stats[section_id].average }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in section.questions %}
+                        <tr>
+                            <td>{{ question }}</td>
+                            <td>{{ answers.get(section_id, {}).get(loop.index0, 'Not answered') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

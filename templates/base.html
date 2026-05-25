@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intelligence Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                {% if session.get('user_id') %}
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    {% if session.get('is_admin') %}
+                        <a href="{{ url_for('admin') }}">Admin</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <div class="container">
+            <p>Intelligence assessment app created by ©H.o.P</p>
+        </div>
+    </footer>
+</body>
+</html>

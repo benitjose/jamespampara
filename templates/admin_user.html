@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="test-title">Career Assist Capacity Calculator</div>
+    
+    <div id="adminPinSection" class="print-hide">
+        <h2>User Summary for {{ user.name }}</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+        {% if user.class %}<p><strong>Class:</strong> {{ user.class }}</p>{% endif %}
+        {% if user.school %}<p><strong>School:</strong> {{ user.school }}</p>{% endif %}
+        <p><strong>Current login PIN:</strong> {{ user.pin_code or 'None' }}</p>
+        <p style="margin-bottom:14px;">This PIN is valid for one login only. Generating a new PIN replaces the previous one and the existing PIN becomes invalid.</p>
+        <form method="post" action="{{ url_for('admin_generate_pin', user_id=user.id) }}" style="margin-bottom:16px;">
+            <button type="submit" class="button-link">Generate new login PIN</button>
+        </form>
+    </div>
+
+    <div class="candidate-info">
+        <p><strong>Candidate Name:</strong> {{ user.name }}</p>
+        <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+    </div>
+
+    {% if grouped_answers|length == 0 %}
+        <p>This user has not submitted any answers yet.</p>
+    {% else %}
+        <p><strong>Overall total score:</strong> {{ overall_total }}</p>
+        <h3>Section summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for section_id, section in sections.items() %}
+                    <tr>
+                        <td>{{ section.name }}</td>
+                        <td>{{ section_summary[section_id].sum }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h3>Score by Section (Bar Chart)</h3>
+        <canvas id="sectionScoreChart" width="600" height="250" style="max-width: 100%; height: auto;"></canvas>
+        <br>
+        <button onclick="window.print()" class="button-link">Print Summary as PDF</button>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('sectionScoreChart');
+        if (ctx) {
+            const sectionData = {
+                {% for section_id, section in sections.items() %}
+                    '{{ section_id }}': {
+                        name: '{{ section.name.split("(")[0].strip() }}',
+                        score: {{ section_summary[section_id].sum }}
+                    }{{ "," if not loop.last else "" }}
+                {% endfor %}
+            };
+
+            const labels = Object.values(sectionData).map(s => s.name);
+            const scores = Object.values(sectionData).map(s => s.score);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Score',
+                        data: scores,
+                        backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                        borderColor: 'rgba(37, 99, 235, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 11 },
+                                padding: 8
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                font: { size: 10 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Score'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { size: 10 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Section'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Sessions</h2>
+    <p>താഴെ നൽകിയിരിക്കുന്ന സെഷനുകളിൽ നിന്ന് ഒന്നൊന്ന് തിരഞ്ഞെടുത്ത് നിങ്ങളുടെ അസസ്‌മെന്റ് ആരംഭിക്കുക. നിങ്ങളുടെ ഉത്തരങ്ങൾ പരിശോധിക്കാനോ പുതുക്കാനോ നിങ്ങൾക്ക് ഏത് സെഷനിലേക്കും തിരികെ പോകാം.</p>
+    <p><strong>Overall progress:</strong> {{ completed_sections }} / {{ total_sections }} completed sessions — {{ overall_percent }}% answered</p>
+</div>
+
+<div class="section-list">
+    {% for section_id, section in question_sections.items() %}
+        <div class="section-card {% if section_status[section_id] %}completed{% endif %}">
+            <h3>Session {{ loop.index }}: {{ section.name }}</h3>
+            <p>{{ section.questions|length }} questions</p>
+            <p><strong>Answered:</strong> {{ section_progress[section_id].answered }} / {{ section_progress[section_id].total }}</p>
+            <p><strong>Completion:</strong> {{ section_progress[section_id].percent }}%</p>
+            {% if section_status[section_id] %}
+                <p><strong>Status:</strong> Completed</p>
+            {% else %}
+                <p><strong>Status:</strong> Not completed</p>
+            {% endif %}
+            <a class="button-link" href="{{ url_for('section', section_id=section_id) }}">Open Session</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% if completed_sections == total_sections %}
+<div class="card" style="margin-top: 24px; text-align: center;">
+    <p style="font-weight: 600; font-size: 1.1rem;">നിങ്ങളെല്ലാം സെഷനുകൾ പൂർത്തിയാക്കിയിരിക്കുന്നു!</p>
+    <a class="button-link" href="{{ url_for('submit_assessment') }}">Submit Assessment</a>
+</div>
+{% endif %}
+{% endblock %}

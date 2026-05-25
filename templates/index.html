@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card hero-banner">
+    <div class="home-header">
+        <div class="logo-header">
+            <img class="logo-image" src="{{ url_for('static', filename='logo.svg') }}" alt="Career Assist logo">
+            <div>
+                <h1>Career Assist Capacity Calculator</h1>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url_for('login') }}" class="button login-button">Login</a>
+            <button id="adminAccessButton" class="button admin-toggle-button" type="button">Admin</button>
+        </div>
+    </div>
+    <h2>Enter Your Details</h2>
+    <form method="post">
+        <div class="question-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="dob">Date of Birth</label>
+            <input id="dob" name="dob" type="date" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="class">Class (Optional)</label>
+            <input id="class" name="class" type="text" placeholder="e.g., 10-A" style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="school">School (Optional)</label>
+            <input id="school" name="school" type="text" placeholder="e.g., XYZ School" style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <input type="submit" value="Register Details">
+    </form>
+    <p style="margin-top:14px; font-size:0.95rem; color:#f8fafc; opacity:0.9;">After registering, the admin will provide a one-time PIN for login. You cannot access the assessment until that PIN is issued.</p>
+</div>
+
+<div id="admin-login-panel" class="card admin-login-card" style="display: {% if show_admin_login %}block{% else %}none{% endif %};">
+    <h2>Admin Login</h2>
+    <p>Only the designated admin can log in here.</p>
+    <form method="post" action="{{ url_for('admin_login') }}">
+        <div class="question-group">
+            <label for="admin-email">Admin Email</label>
+            <input id="admin-email" name="email" type="email" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="admin-password">Password</label>
+            <input id="admin-password" name="password" type="password" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <input type="submit" value="Login as Admin">
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var button = document.getElementById('adminAccessButton');
+        var panel = document.getElementById('admin-login-panel');
+        if (button) {
+            button.addEventListener('click', function() {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+    });
+</script>
+{% endblock %}

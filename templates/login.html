@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Login</h2>
+    <form method="post">
+        <div class="question-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <div class="question-group">
+            <label for="password">One-time PIN</label>
+            <input id="password" name="password" type="password" required style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <p style="margin-top:8px; font-size:0.95rem; color:#334155;">Enter the one-time PIN provided by the admin. Each PIN may be used only once.</p>
+        <input type="submit" value="Login">
+    </form>
+    <p style="margin-top:16px;">New user? <a href="{{ url_for('register') }}">Register here</a>.</p>
+</div>
+{% endblock %}

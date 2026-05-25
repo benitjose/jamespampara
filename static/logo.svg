@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-labelledby="title">
+  <title id="title">Career Assist Capacity Calculator logo</title>
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="80" rx="20" fill="#0f172a"/>
+  <circle cx="44" cy="40" r="24" fill="url(#g1)" opacity="0.95"/>
+  <circle cx="72" cy="40" r="24" fill="url(#g2)" opacity="0.85"/>
+  <circle cx="58" cy="24" r="16" fill="#34d399" opacity="0.95"/>
+  <path d="M44 40c15 15 32 5 32 5s-1-17-16-29-16-2-16 0-1 12 0 24z" fill="#fbbf24" opacity="0.9"/>
+  <text x="108" y="33" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="700">Career Assist</text>
+  <text x="108" y="56" font-family="Arial, sans-serif" font-size="14" fill="#d1d5db">Capacity Calculator</text>
+</svg>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Registration is successful</h2>
+    <p>Please enter the one-time PIN provided by the admin to start the test.</p>
+    <form method="post">
+        <div class="question-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required value="{{ email }}" style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;" {% if email %}readonly{% endif %}>
+        </div>
+        <div class="question-group">
+            <label for="pin_code">One-time PIN</label>
+            <input id="pin_code" name="pin_code" type="text" required placeholder="Enter PIN" style="width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px;">
+        </div>
+        <input type="submit" value="Verify PIN">
+    </form>
+    <p style="margin-top:16px;">Already have a PIN? <a href="{{ url_for('login') }}">Login here</a>.</p>
+</div>
+{% endblock %}
