@@ -501,6 +501,26 @@ footer {
         display: none;
     }
 
+    .print-only {
+        display: block !important;
+    }
+
+    .remark-box {
+        margin-top: 4mm;
+        border: 1px solid #000;
+        min-height: 21mm;
+        padding: 2.5mm;
+        width: 100%;
+        box-sizing: border-box;
+        page-break-inside: avoid;
+    }
+
+    .remark-label {
+        font-weight: 700;
+        font-size: 8px;
+        margin-bottom: 1mm;
+    }
+
     .card p {
         font-size: 10px;
         margin: 3px 0;
@@ -511,7 +531,7 @@ footer {
         width: 100%;
         border-collapse: collapse;
         margin: 8px 0;
-        font-size: 9px;
+        font-size: 6.3px;
     }
 
     table th,
@@ -530,10 +550,10 @@ footer {
     #sectionScoreChart {
         page-break-inside: avoid;
         max-width: 100%;
-        max-height: 200px;
+        max-height: none;
         margin: 8px 0;
         width: 100% !important;
-        height: 200px !important;
+        height: 360px !important;
     }
 
     footer {
