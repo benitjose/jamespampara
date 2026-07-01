@@ -35,12 +35,19 @@ body {
 }
 
 .logo-image {
-    width: 94px;
-    height: auto;
+    width: 150px;
+    height: 230px;
     border-radius: 20px;
     background: rgba(255,255,255,0.14);
     padding: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.brand-name-image {
+    max-height: 240px;
+    width: 550px;
+    display: block;
+    margin: 0 auto;
 }
 
 .container {
@@ -112,10 +119,8 @@ header nav a:hover {
 }
 
 .card .question-group label::before {
-    content: "🟢";
-    display: inline-block;
-    margin-right: 8px;
-    opacity: 0.75;
+    content: "";
+    display: none;
 }
 
 .hero-banner input,
@@ -159,13 +164,16 @@ header nav a:hover {
 .logo-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
+    flex: 1;
 }
 
 .header-actions {
     display: flex;
+    flex-direction: column;
     gap: 8px;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .login-button {

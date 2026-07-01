@@ -1,7 +1,7 @@
 import os
 import secrets
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, session, flash, g
+from flask import Flask, render_template, request, redirect, url_for, session, flash, g, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -163,6 +163,11 @@ QUESTION_SECTIONS = {
 
 ADMIN_EMAIL = 'james@pampara'
 ADMIN_PASSWORD = '123@pampara'
+
+
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+    return send_from_directory(os.path.join(app.root_path, 'images'), filename)
 
 
 def get_db():

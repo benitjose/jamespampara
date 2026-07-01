@@ -4,15 +4,17 @@
 <div class="card hero-banner">
     <div class="home-header">
         <div class="logo-header">
-            <img class="logo-image" src="{{ url_for('static', filename='logo.svg') }}" alt="Career Assist logo">
-            <div>
-                <h1>Career Assist Capacity Calculator</h1>
-            </div>
+            <img class="logo-image" src="{{ url_for('serve_image', filename='logo.jpeg') }}" alt="Career Assist logo">
+            <img class="brand-name-image" src="{{ url_for('serve_image', filename='name.jpeg') }}" alt="Career Assist name">
         </div>
         <div class="header-actions">
             <a href="{{ url_for('login') }}" class="button login-button">Login</a>
             <button id="adminAccessButton" class="button admin-toggle-button" type="button">Admin</button>
         </div>
+    </div>
+    <div style="margin: 2mm 0 16px 0; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; background: rgba(255,255,255,0.08); box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+        <p style="margin: 0 0 8px 0; color: #f8fafc; line-height: 1.6; font-weight: 600;">ഇത് "Multiple Intelligence Career Mapper Inventory" എന്ന മൂല്യനിർണ്ണയ ഉപകരണമാണ്.</p>
+        <p style="margin: 0; color: #f8fafc; line-height: 1.6;">നിങ്ങളിലെ വിവിധ ബുദ്ധിശേഷികൾ, കഴിവുകൾ, അഭിരുചികൾ, താൽപര്യങ്ങൾ എന്നിവ തിരിച്ചറിയുന്നതിനും ഭാവിയിൽ നിങ്ങൾക്ക് അനുയോജ്യമായ പഠന-കരിയർ മേഖലകൾ മനസ്സിലാക്കുന്നതിനായി ഈ ഇൻവെന്ററി തയ്യാറാക്കിയിരിക്കുന്നു.</p>
     </div>
     <h2>Enter Your Details</h2>
     <form method="post">
