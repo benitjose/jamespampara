@@ -17,7 +17,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'replace-this-with-a-random-secret'
 app.config['DATABASE_URL'] = os.environ.get(
     'DATABASE_URL',
-    'postgresql://postgres:postgres@localhost:5432/jamespampara'
+    'postgresql://capcaldb_f70n_user:1I03a1qCDfDSVQI65Ax75mX8OgNLPknK@dpg-d9jooqd8nd3s73br81fg-a/capcaldb_f70n'
+    #'postgresql://postgres:postgres@localhost:5432/jamespampara'
 )
 
 
