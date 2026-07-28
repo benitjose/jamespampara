@@ -6,8 +6,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 try:
     import psycopg2
     from psycopg2.extras import RealDictCursor
+    print("✅ psycopg2 imported successfully")
     POSTGRES_AVAILABLE = True
-except ImportError:  # pragma: no cover - fallback for local runs
+except Exception as e:
+    print("❌ psycopg2 import failed:", repr(e))
     psycopg2 = None
     RealDictCursor = None
     POSTGRES_AVAILABLE = False
