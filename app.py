@@ -15,11 +15,23 @@ except ImportError:  # pragma: no cover - fallback for local runs
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'replace-this-with-a-random-secret'
-app.config['DATABASE_URL'] = os.environ.get(
-    'DATABASE_URL',
-    'postgresql://capcaldb_f70n_user:1I03a1qCDfDSVQI65Ax75mX8OgNLPknK@dpg-d9jooqd8nd3s73br81fg-a/capcaldb_f70n'
-    #'postgresql://postgres:postgres@localhost:5432/jamespampara'
-)
+DEFAULT_DATABASE_URL = 'postgresql://capcaldb_f70n_user:1I03a1qCDfDSVQI65Ax75mX8OgNLPknK@dpg-d9jooqd8nd3s73br81fg-a/capcaldb_f70n'
+
+
+def _normalize_database_url(url):
+    if not url:
+        return url
+    if 'sslmode=' not in url and url.startswith(('postgres://', 'postgresql://')):
+        separator = '?' if '?' not in url else '&'
+        return f'{url}{separator}sslmode=require'
+    return url
+
+
+app.config['DATABASE_URL'] = _normalize_database_url(os.environ.get('DATABASE_URL') or DEFAULT_DATABASE_URL)
+
+
+def _is_postgres_url(url):
+    return bool(url) and url.startswith(('postgres://', 'postgresql://'))
 
 
 def _prepare_query(query, use_postgres):
@@ -218,10 +230,12 @@ def serve_image(filename):
 
 def get_db():
     if 'db' not in g:
-        use_postgres = POSTGRES_AVAILABLE and app.config['DATABASE_URL'].startswith('postgres')
+        use_postgres = POSTGRES_AVAILABLE and _is_postgres_url(app.config['DATABASE_URL'])
         if use_postgres:
+            print(f"[db] Using PostgreSQL backend for {app.config['DATABASE_URL']}")
             g.db = DatabaseConnection(psycopg2.connect(app.config['DATABASE_URL']), True)
         else:
+            print('[db] Using SQLite fallback backend')
             sqlite_path = os.path.join(app.root_path, 'data.sqlite3')
             conn = sqlite3.connect(sqlite_path)
             conn.row_factory = sqlite3.Row
