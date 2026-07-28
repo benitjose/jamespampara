@@ -14,7 +14,7 @@ except ImportError:  # pragma: no cover - fallback for local runs
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'replace-this-with-a-random-secret'
-DEFAULT_DATABASE_URL = 'postgresql://capcaldb_f70n_user:1I03a1qCDfDSVQI65Ax75mX8OgNLPknK@dpg-d9jooqd8nd3s73br81fg-a.oregon-postgres.render.com/capcaldb_f70n'
+DEFAULT_DATABASE_URL = 'postgresql://neondb_owner:npg_Xlhntx02vTNw@ep-lucky-heart-axdcmydb.c-4.us-east-2.aws.neon.tech/neondb?sslmode=require'
 
 
 def _normalize_database_url(url):
